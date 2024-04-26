@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caesar Cipher</title>
+</head>
+<body>
+<h2>Caesar Cipher Encryption</h2>
+<textarea id="plaintext" rows="4" cols="50" placeholder="Enter text to encrypt"></textarea><br>
+<label for="shift">Enter shift amount:</label>
+<input type="number" id="shift" name="shift" min="1" max="25" value="3"><br>
+<button onclick="encrypt()">Encrypt</button><br>
+<h2>Encrypted Text</h2>
+<textarea id="encryptedText" rows="4" cols="50" readonly></textarea><br>
+
+<script>
+function encrypt() {
+    var plaintext = document.getElementById("plaintext").value;
+    var shift = parseInt(document.getElementById("shift").value);
+    var encryptedText = "";
+
+    for (var i = 0; i < plaintext.length; i++) {
+        var charCode = plaintext.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+            encryptedText += String.fromCharCode(((charCode - 65 + shift) % 26) + 65); // Uppercase letters
+        } else if (charCode >= 97 && charCode <= 122) {
+            encryptedText += String.fromCharCode(((charCode - 97 + shift) % 26) + 97); // Lowercase letters
+        } else {
+            encryptedText += plaintext.charAt(i); // Non-alphabetic characters
+        }
+    }
+
+    document.getElementById("encryptedText").value = encryptedText;
+}
+</script>
+</body>
+</html>
